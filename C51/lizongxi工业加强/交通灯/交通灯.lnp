@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"交通灯.obj" 
+TO "交通灯" 
+RAMSIZE(256) 

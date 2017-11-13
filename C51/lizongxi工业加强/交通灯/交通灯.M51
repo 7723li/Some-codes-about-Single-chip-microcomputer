@@ -1,0 +1,259 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        06/17/2016  22:17:23  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, 交通灯.obj TO 交通灯 RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  交通灯.obj (交通灯)
+  E:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  E:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  交通灯 (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0012H     UNIT         ?DT?交通灯
+            DATA    001AH     000CH     UNIT         _DATA_GROUP_
+            IDATA   0026H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     00B7H     UNIT         ?PR?MAIN?交通灯
+            CODE    08B7H     008CH     UNIT         ?C_C51STARTUP
+            CODE    0943H     0069H     UNIT         ?PR?_LED_SHOW?交通灯
+            CODE    09ACH     0055H     UNIT         ?C?LIB_CODE
+            CODE    0A01H     0025H     UNIT         ?PR?_DELAY?交通灯
+            CODE    0A26H     001DH     UNIT         ?PR?_INPUT?交通灯
+            CODE    0A43H     0017H     UNIT         ?C_INITSEG
+            CODE    0A5AH     0009H     UNIT         ?PR?OUTPUT?交通灯
+
+
+
+OVERLAY MAP OF MODULE:   交通灯 (?C_STARTUP)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?交通灯
+  +--> ?C_INITSEG
+
+?PR?MAIN?交通灯                001AH    0006H
+  +--> ?PR?_LED_SHOW?交通灯
+  +--> ?PR?_DELAY?交通灯
+
+?PR?_LED_SHOW?交通灯           0020H    0006H
+  +--> ?PR?_INPUT?交通灯
+  +--> ?PR?OUTPUT?交通灯
+  +--> ?PR?_DELAY?交通灯
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/17/2016  22:17:23  PAGE 2
+
+
+
+
+
+SYMBOL TABLE OF MODULE:  交通灯 (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:08B7H         SEGMENT       ?C_C51STARTUP
+  I:0026H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:08BAH         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:08B7H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:08B7H         LINE#         133
+  C:08B9H         LINE#         134
+  C:08BAH         LINE#         135
+  C:08BBH         LINE#         136
+  C:08BDH         LINE#         185
+  C:08C0H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        交通灯
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  C:0A01H         PUBLIC        _delay
+  B:0080H.1       PUBLIC        DS
+  D:00B8H         PUBLIC        IP
+  B:00D0H.7       PUBLIC        CY
+  B:00A0H.0       PUBLIC        button
+  C:0800H         PUBLIC        main
+  C:0A26H         PUBLIC        _input
+  D:0098H         PUBLIC        SCON
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/17/2016  22:17:23  PAGE 3
+
+
+  C:0A5AH         PUBLIC        output
+  D:0088H         PUBLIC        TCON
+  D:0008H         PUBLIC        led_seg
+  D:000AH         PUBLIC        led_mod
+  C:0943H         PUBLIC        _led_show
+  B:0080H.0       PUBLIC        sh
+  B:0080H.2       PUBLIC        st
+  D:00C8H         PUBLIC        T2CON
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  -------         DO            
+  D:001AH         SYMBOL        a
+  D:001CH         SYMBOL        b
+  D:001EH         SYMBOL        c
+  -------         ENDDO         
+  C:0800H         LINE#         17
+  C:0800H         LINE#         18
+  C:0800H         LINE#         20
+  C:0803H         LINE#         21
+  C:0809H         LINE#         22
+  C:0809H         LINE#         23
+  C:0809H         LINE#         24
+  C:0809H         LINE#         25
+  C:080FH         LINE#         26
+  C:080FH         LINE#         27
+  C:0812H         LINE#         28
+  C:0819H         LINE#         29
+  C:081CH         LINE#         30
+  C:0823H         LINE#         31
+  C:0838H         LINE#         32
+  C:083EH         LINE#         33
+  C:083EH         LINE#         34
+  C:0841H         LINE#         35
+  C:0848H         LINE#         36
+  C:084BH         LINE#         37
+  C:0852H         LINE#         38
+  C:0867H         LINE#         39
+  C:086DH         LINE#         40
+  C:086DH         LINE#         41
+  C:0870H         LINE#         42
+  C:0877H         LINE#         43
+  C:088CH         LINE#         44
+  C:08A2H         LINE#         45
+  C:08A2H         LINE#         46
+  C:08A5H         LINE#         47
+  C:08ACH         LINE#         48
+  C:08B6H         LINE#         49
+  C:08B6H         LINE#         50
+  C:08B6H         LINE#         51
+  -------         ENDPROC       MAIN
+  -------         PROC          _LED_SHOW
+  D:0002H         SYMBOL        d
+  -------         DO            
+  D:0020H         SYMBOL        e
+  D:0022H         SYMBOL        f
+  D:0024H         SYMBOL        i
+  -------         ENDDO         
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/17/2016  22:17:23  PAGE 4
+
+
+  C:0943H         LINE#         52
+  C:0947H         LINE#         53
+  C:0947H         LINE#         55
+  C:0952H         LINE#         56
+  C:0961H         LINE#         57
+  C:0966H         LINE#         58
+  C:0966H         LINE#         59
+  C:096BH         LINE#         60
+  C:0975H         LINE#         61
+  C:0978H         LINE#         62
+  C:097FH         LINE#         63
+  C:0984H         LINE#         64
+  C:098EH         LINE#         65
+  C:0991H         LINE#         66
+  C:0998H         LINE#         67
+  C:09ABH         LINE#         68
+  -------         ENDPROC       _LED_SHOW
+  -------         PROC          _INPUT
+  D:0007H         SYMBOL        g
+  -------         DO            
+  D:0004H         SYMBOL        h
+  -------         ENDDO         
+  C:0A26H         LINE#         69
+  C:0A26H         LINE#         70
+  C:0A26H         LINE#         72
+  C:0A29H         LINE#         73
+  C:0A29H         LINE#         74
+  C:0A2DH         LINE#         75
+  C:0A2FH         LINE#         76
+  C:0A31H         LINE#         77
+  C:0A32H         LINE#         78
+  C:0A33H         LINE#         79
+  C:0A35H         LINE#         80
+  C:0A36H         LINE#         81
+  C:0A37H         LINE#         82
+  C:0A42H         LINE#         83
+  -------         ENDPROC       _INPUT
+  -------         PROC          OUTPUT
+  C:0A5AH         LINE#         84
+  C:0A5AH         LINE#         85
+  C:0A5AH         LINE#         86
+  C:0A5CH         LINE#         87
+  C:0A5DH         LINE#         88
+  C:0A5EH         LINE#         89
+  C:0A60H         LINE#         90
+  C:0A61H         LINE#         91
+  C:0A62H         LINE#         92
+  -------         ENDPROC       OUTPUT
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        z
+  -------         DO            
+  D:0004H         SYMBOL        x
+  D:0002H         SYMBOL        y
+  -------         ENDDO         
+  C:0A01H         LINE#         93
+  C:0A01H         LINE#         94
+  C:0A01H         LINE#         96
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/17/2016  22:17:23  PAGE 5
+
+
+  C:0A04H         LINE#         97
+  C:0A25H         LINE#         98
+  -------         ENDPROC       _DELAY
+  -------         ENDMOD        交通灯
+
+  -------         MODULE        ?C?UIDIV
+  C:09ACH         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 0190H BYTE (19%) *
+******************************************************************************
+
+Program Size: data=39.0 xdata=0 code=614
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

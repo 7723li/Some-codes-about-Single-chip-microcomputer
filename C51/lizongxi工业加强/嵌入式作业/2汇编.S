@@ -1,0 +1,54 @@
+ORG 0000H
+    LJMP START
+    ORG 000BH
+    LJMP Timer0Interrupt
+
+START:
+    MOV SP,#60H
+    LCALL InitTimer0
+
+LOOP:
+         SETB P2.0
+		 SETB P2.1
+		 SETB P2.2
+		 SETB P2.3
+		 SETB P2.4
+		 SETB P2.5
+		 SETB P2.6
+		 SETB P2.7
+
+    LJMP LOOP
+
+InitTimer0:
+    MOV TMOD,#01H
+    MOV TH0,#3CH
+    MOV TL0,#0B0H
+    SETB EA
+    SETB ET0
+    SETB TR0
+    RET
+
+Timer0Interrupt:
+    PUSH DPH
+    PUSH DPL
+    PUSH ACC
+	CLR TR0
+	CPL P2.0
+	CPL P2.1
+	CPL P2.2
+	CPL P2.3
+	CPL P2.4
+	CPL P2.5
+	CPL P2.6
+	CPL P2.7
+	SETB TR0
+    MOV TH0,#3CH
+    MOV TL0,#0B0H
+ 
+
+    POP ACC
+    POP DPL
+    POP DPH
+    RETI
+
+END

@@ -1,0 +1,62 @@
+C51 COMPILER V9.00   流水灯                                                                04/12/2016 13:40:23 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE 流水灯
+OBJECT MODULE PLACED IN 流水灯.OBJ
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE 流水灯.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1                     #include<reg52.h>
+   2                 #include<intrins.h>
+   3                     #define uint unsigned int
+   4                     #define uchar unsigned char
+   5                   //sbit beep=P3^3;
+   6                     sbit d1=P1^0;
+   7                 //sbit d2=P3^2;
+   8                     uchar temp; 
+   9                     void delay(uint);
+  10                     void main()
+  11                     {
+  12   1              //IE=0x81;
+  13   1                      temp=0x7f;
+  14   1                      P1=temp;
+  15   1                    //beep=0;
+  16   1                      while(1)
+  17   1                 {
+  18   2                      temp=_cror_(temp,1);
+  19   2                  delay(600);
+  20   2                      P1=temp;                
+  21   2                      delay(600);
+  22   2                    //beep=1;
+  23   2                  }
+  24   1                      }                                                                                        
+  25                     void delay(uint z)
+  26                     {
+  27   1                      uint x,y;
+  28   1                      for (x=30;x>0;x--)
+  29   1                          for (y=z;y>0;y--);
+  30   1                 }
+  31                /*void XX()interrupt 0
+  32                 {
+  33                  if (d2=0)
+  34                  temp=0xff;
+  35                  P1=temp;
+  36                 }       */
+  37          
+  38          
+  39                     
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =     72    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      1    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

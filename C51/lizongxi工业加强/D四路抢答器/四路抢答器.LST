@@ -1,0 +1,162 @@
+C51 COMPILER V9.00   ËÄ_·ÇÀ´ðÆ÷                                                            06/24/2016 18:42:30 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE ËÄ_·ÇÀ´ðÆ÷
+OBJECT MODULE PLACED IN ËÄÂ·ÇÀ´ðÆ÷.OBJ
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE ËÄÂ·ÇÀ´ðÆ÷.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #define uchar unsigned char
+   3          #define uint unsigned int
+   4          sbit sh=P0^0;
+   5          sbit DS=P0^1;
+   6          sbit st=P0^2;
+   7          sbit sh2=P0^3;
+   8          sbit DS2=P0^4;
+   9          sbit st2=P0^5;
+  10          sbit beep=P2^3;
+  11          sbit gr=P2^4;
+  12          sbit re=P2^5;
+  13          uchar led_seg[]={0xfd,0xfd};
+  14          uchar led_mod[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x58,0x5e,0x79,0x71};
+  15          void input(uchar d);
+  16          void output();
+  17          void input2(uchar i);
+  18          void output2();
+  19          void delay(uint z);
+  20          void main()
+  21          {
+  22   1              int a;
+  23   1              beep=0;
+  24   1              gr=0;
+  25   1              re=0;
+  26   1              input2(0x55);
+  27   1              output2();
+  28   1              switch(P2)
+  29   1              {
+  30   2                      case 0x87:
+  31   2                      
+  32   2                      a=5;
+  33   2                      while(a--)
+  34   2                      {  
+  35   3                      input(led_seg[0]);
+  36   3                      input(led_mod[0/10]);
+  37   3                      input(led_seg[1]);
+  38   3                      input(led_mod[0%10]);
+  39   3                              beep=1;
+  40   3                              input2(0x95);
+  41   3                              output2();
+  42   3                              delay(5);
+  43   3                              input(0x15);
+  44   3                              output2();
+  45   3                          delay(5);
+  46   3                              beep=0;
+  47   3                      }break;
+  48   2                      case 0xc3:
+  49   2                      input(led_seg[0]);
+  50   2                      input(led_mod[1/10]);
+  51   2                      input(led_seg[1]);
+  52   2                      input(led_mod[1%10]);
+  53   2                      a=5;
+  54   2                      while(a--)
+  55   2                      {
+C51 COMPILER V9.00   ËÄ_·ÇÀ´ðÆ÷                                                            06/24/2016 18:42:30 PAGE 2   
+
+  56   3                              beep=1;
+  57   3                              input2(0x65);
+  58   3                              output2();
+  59   3                              delay(5);
+  60   3                              input(0x45);
+  61   3                              output2();
+  62   3                          delay(5);
+  63   3                      }break;
+  64   2                      case 0xc5:
+  65   2                      input(led_seg[0]);
+  66   2                      input(led_mod[2/10]);
+  67   2                      input(led_seg[1]);
+  68   2                      input(led_mod[2%10]);
+  69   2                      a=5;
+  70   2                      while(a--)
+  71   2                      {
+  72   3                              beep=1;
+  73   3                              input2(0x15);
+  74   3                              output2();
+  75   3                              delay(5);
+  76   3                              input(0x95);
+  77   3                              output2();
+  78   3                          delay(5);
+  79   3                      }break;
+  80   2                      case 0xc6:
+  81   2                      input(led_seg[0]);
+  82   2                      input(led_mod[0/10]);
+  83   2                      input(led_seg[1]);
+  84   2                      input(led_mod[0%10]);
+  85   2                      a=5;
+  86   2                      while(a--)
+  87   2                      {
+  88   3                              beep=1;
+  89   3                              input2(0x45);
+  90   3                              output2();
+  91   3                              delay(5);
+  92   3                              input(0x65);
+  93   3                              output2();
+  94   3                          delay(5);
+  95   3                      }break;
+  96   2              }       
+  97   1      }
+  98          void input(uchar d)
+  99          {
+ 100   1              int e;
+ 101   1              for(e=0;e<8;e++)
+ 102   1              {
+ 103   2                      DS=CY;
+ 104   2                      d<<=1;
+ 105   2                      sh=0;
+ 106   2                      sh=1;
+ 107   2              }
+ 108   1      }
+ 109          void output()
+ 110          {
+ 111   1              st=0;
+ 112   1              st=1;
+ 113   1      }
+ 114          void input2(uchar i)
+ 115          {
+ 116   1              int j;
+ 117   1              for(j=0;j<8;j++)
+C51 COMPILER V9.00   ËÄ_·ÇÀ´ðÆ÷                                                            06/24/2016 18:42:30 PAGE 3   
+
+ 118   1              {       
+ 119   2                      i<<=1;
+ 120   2                      DS2=CY;
+ 121   2                      sh2=0;
+ 122   2                      sh2=1;
+ 123   2              }
+ 124   1      }
+ 125          void output2()
+ 126          {
+ 127   1              st2=0;
+ 128   1              st2=1;
+ 129   1      }
+ 130          void delay(uint z)
+ 131          {
+ 132   1              int x,y;
+ 133   1              for(x=0;x<125;x++)
+ 134   1              for(y=z;z>0;y--);
+ 135   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    409    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     18       2
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

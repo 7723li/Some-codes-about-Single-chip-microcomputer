@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"四路抢答器.obj" 
+TO "四路抢答器" 
+RAMSIZE(256) 

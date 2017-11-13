@@ -1,0 +1,151 @@
+#include<reg51.h>
+#include<intrins.h>
+#define uchar unsigned char 
+#define uint unsigned int
+
+sbit stcp=P2^2;
+sbit ds=P2^1;
+sbit shcp=P2^0;
+
+uchar code liezhicode[]={
+0xe3,0xdd,0xdd,0xdd,0xdd,0xdd,0xdd,0xe3,	   //0
+0xef,0xe7,0xeb,0xef,0xef,0xef,0xef,0x83,	   //1
+0xff,0xe7,0xdb,0xdf,0xef,0xf3,0xfb,0xc3,       //2
+0xe7,0xdb,0xdf,0xe7,0xdf,0xdf,0xdb,0xe7,	   //3
+0xef,0xe7,0xeb,0xed,0x80,0xef,0xef,0xef,	   //4
+0xc3,0xfb,0xfb,0xe3,0xdf,0xdf,0xdb,0xe7,	   //5
+0xe3,0xfd,0xfd,0xe1,0xdd,0xdd,0xdd,0xe3,	   //6
+0x81,0x9f,0x9f,0xcf,0xe7,0xf3,0xf3,0xf3,	   //7
+0xe7,0xdb,0xdb,0xdb,0xe7,0xdb,0xdb,0xe7,	   //8
+0xe3,0xdd,0xdd,0xc1,0xdf,0xdf,0xdd,0xe3,    //9
+0x00,0x55,0x55,0x50,0x55,0xdd,0x58,0x27,    //现
+0xf7,0x00,0xeb,0xed,0x80,0xed,0xed,0x01,	//在
+0xbf,0x08,0xba,0xaa,0xa8,0xba,0xba,0x98,	//时
+0x04,0x7f,0x42,0x5a,0x42,0x5a,0x42,0x3e, 	//间
+0xdd,0x88,0xd5,0xc8,0xb5,0x01,0xb5,0x851	//格
+
+};
+
+
+uchar code hangzhicode[]=
+{0x01,0x2,0x04,0x08,0x10,0x20,0x40,0x80};
+
+uchar code ledyellowcode[]={0x07,0xff};
+
+uchar i,j;
+uint x,z;
+bit q;
+void delay1ms(unsigned int x)
+{
+	unsigned int i,j;
+	for(j=0;j<x;j++)
+		for(i=0;i<10;i++);
+}
+
+
+void SendByte(unsigned char mun)
+{    
+    unsigned char y;
+    for(y=0;y<8;y++)
+    {
+        shcp=0;    
+        if(mun&0x80)  //1000 0000b & mun=1xxx xxxxb    0x00
+            ds=1;    
+        else
+            ds=0;    
+        mun<<=1;        
+        shcp=1;    
+	
+    }
+}
+
+void Send3Byte(unsigned char dat1,unsigned char dat2,unsigned char dat3)
+{    
+   SendByte(dat1);     //发送第一个字节
+   SendByte(dat2);     //发送第二个字节
+   SendByte(dat3);     //发送第三个字节
+}
+
+void OUT595(void)
+{
+    stcp=0;    //上升沿将数据锁存。
+    stcp=1;
+    stcp=0;
+}
+
+void show_led88(void) 
+{
+    unsigned char hangzhi,liezhi,guanyi,guaner;	
+	   while(1)
+	   {	
+	   		TR0=1;
+			EA=1;
+			j=8*x;
+			for(i=0;i<8;i++)
+			{		
+			    hangzhi=hangzhicode[i];
+			    liezhi=liezhicode[j];
+			    guanyi=0x00;
+			    Send3Byte(guanyi,liezhi,hangzhi);    
+			    OUT595();
+			    
+			  
+			    delay1ms(10);
+			    j++;
+			}
+			
+			
+			
+			j=8*x;
+			for(i=0;i<8;i++)
+			{		
+			   
+			    
+			    hangzhi=hangzhicode[i];
+			    liezhi=liezhicode[j];
+			    guaner=0x00;
+			    Send3Byte(hangzhi,liezhi,guaner);    
+			    OUT595();
+			   
+			    delay1ms(10);
+			    j++;
+			}
+			
+		}              
+}
+void T0_IN() interrupt 1
+{
+	TR0=0;
+	EA=0;
+	TH0=65536/256;
+	TL0=65536%256;
+    z++;
+   if(z>14)
+   {
+	   z=0;
+	   q=~q;
+	   if(x>=14)
+		{x=0;}
+		else
+		{x++;}
+		}
+}
+
+void main(void) 
+{
+ 	TMOD=0X01;
+	TH0=65536/256;
+	TL0=65536%256;
+	EA=1;
+	ET0=1;
+
+	z=0;
+	while(1)
+    {
+		q=0;
+		x=0;
+		j=8*x;//要显示的内容所在数据表中的位置
+		show_led88();
+
+    }
+}

@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"车位项目.obj" 
+TO "车位项目" 
+RAMSIZE(256) 

@@ -1,0 +1,16 @@
+<html>
+<body>
+<pre>
+<h1>礦ision Build Log</h1>
+<h2>Project:</h2>
+E:\lizongxi工业加强\流水灯加强版\流水灯加强.uvproj
+Project File Date:  06/16/2016
+
+<h2>Output:</h2>
+Build target 'Target 1'
+assembling STARTUP.A51...
+compiling 流水灯加强.c...
+linking...
+Program Size: data=15.0 xdata=0 code=424
+creating hex file from "流水灯加强"...
+"流水灯加强" - 0 Error(s), 0 Warning(s).

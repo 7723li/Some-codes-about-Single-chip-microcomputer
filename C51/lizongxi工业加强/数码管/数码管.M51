@@ -1,0 +1,186 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        06/17/2016  22:21:08  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, 数码管.obj TO 数码管 RAMSIZE (256)
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  数码管.obj (数_牍_)
+  E:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+  E:\KEIL\C51\LIB\C51S.LIB (?C?SIDIV)
+  E:\KEIL\C51\LIB\C51S.LIB (?C?UIDIV)
+
+
+LINK MAP OF MODULE:  数码管 (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0018H     UNIT         ?DT?数_牍_
+            DATA    0020H     0008H     UNIT         _DATA_GROUP_
+            IDATA   0028H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+                    0003H     07FDH                  *** GAP ***
+            CODE    0800H     008CH     UNIT         ?C_C51STARTUP
+            CODE    088CH     008BH     UNIT         ?C?LIB_CODE
+            CODE    0917H     007CH     UNIT         ?PR?MAIN?数_牍_
+            CODE    0993H     002DH     UNIT         ?PR?_DELAY?数_牍_
+            CODE    09C0H     001DH     UNIT         ?C_INITSEG
+
+
+
+OVERLAY MAP OF MODULE:   数码管 (?C_STARTUP)
+
+
+SEGMENT                          DATA_GROUP 
+  +--> CALLED SEGMENT          START    LENGTH
+----------------------------------------------
+?C_C51STARTUP                  -----    -----
+  +--> ?PR?MAIN?数_牍_
+  +--> ?C_INITSEG
+
+?PR?MAIN?数_牍_                0020H    0008H
+  +--> ?PR?_DELAY?数_牍_
+
+
+
+SYMBOL TABLE OF MODULE:  数码管 (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/17/2016  22:21:08  PAGE 2
+
+
+  -------         MODULE        ?C_STARTUP
+  C:0800H         SEGMENT       ?C_C51STARTUP
+  I:0028H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0803H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0800H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0800H         LINE#         133
+  C:0802H         LINE#         134
+  C:0803H         LINE#         135
+  C:0804H         LINE#         136
+  C:0806H         LINE#         185
+  C:0809H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        数_牍_
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0080H         PUBLIC        P0
+  D:0090H         PUBLIC        P1
+  D:00A0H         PUBLIC        P2
+  D:00B0H         PUBLIC        P3
+  D:00A8H         PUBLIC        IE
+  C:099BH         PUBLIC        _delay
+  D:00B8H         PUBLIC        IP
+  B:00A0H.3       PUBLIC        beep
+  B:00A0H.0       PUBLIC        button
+  C:0917H         PUBLIC        main
+  D:0098H         PUBLIC        SCON
+  D:0088H         PUBLIC        TCON
+  D:0008H         PUBLIC        led_mod
+  D:00C8H         PUBLIC        T2CON
+  D:0018H         PUBLIC        duanma
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          MAIN
+  -------         DO            
+  D:0020H         SYMBOL        a
+  D:0022H         SYMBOL        b
+  D:0024H         SYMBOL        x
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/17/2016  22:21:08  PAGE 3
+
+
+  D:0026H         SYMBOL        y
+  -------         ENDDO         
+  C:0917H         LINE#         9
+  C:0917H         LINE#         10
+  C:0917H         LINE#         12
+  C:0919H         LINE#         13
+  C:091CH         LINE#         14
+  C:0922H         LINE#         15
+  C:0925H         LINE#         16
+  C:0925H         LINE#         17
+  C:0927H         LINE#         18
+  C:092EH         LINE#         19
+  C:0933H         LINE#         20
+  C:0933H         LINE#         21
+  C:0935H         LINE#         22
+  C:0944H         LINE#         23
+  C:0953H         LINE#         24
+  C:0958H         LINE#         25
+  C:0958H         LINE#         26
+  C:095BH         LINE#         27
+  C:095FH         LINE#         28
+  C:0962H         LINE#         29
+  C:0965H         LINE#         30
+  C:0969H         LINE#         31
+  C:096CH         LINE#         32
+  C:097FH         LINE#         33
+  C:0992H         LINE#         34
+  C:0992H         LINE#         35
+  -------         ENDPROC       MAIN
+  -------         PROC          L?0020
+  -------         ENDPROC       L?0020
+  -------         PROC          _DELAY
+  D:0006H         SYMBOL        z
+  -------         DO            
+  D:0004H         SYMBOL        x
+  D:0002H         SYMBOL        y
+  -------         ENDDO         
+  C:099BH         LINE#         36
+  C:099BH         LINE#         37
+  C:099BH         LINE#         39
+  C:099EH         LINE#         40
+  C:09BFH         LINE#         41
+  -------         ENDPROC       _DELAY
+  -------         ENDMOD        数_牍_
+
+  -------         MODULE        ?C?SIDIV
+  C:088CH         PUBLIC        ?C?SIDIV
+  -------         ENDMOD        ?C?SIDIV
+
+  -------         MODULE        ?C?UIDIV
+  C:08C2H         PUBLIC        ?C?UIDIV
+  -------         ENDMOD        ?C?UIDIV
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00D4H BYTE (10%) *
+******************************************************************************
+
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/17/2016  22:21:08  PAGE 4
+
+
+Program Size: data=41.0 xdata=0 code=480
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,107 @@
+C51 COMPILER V9.00   流水灯加强                                                            06/17/2016 22:22:35 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE 流水灯加强
+OBJECT MODULE PLACED IN 流水灯加强.OBJ
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE 流水灯加强.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #include<intrins.h>
+   3          #define uint unsigned int 
+   4          #define uchar unsigned char
+   5          uchar led_mod[]={0xff,};
+   6          sbit sh=P0^3;
+   7          sbit DS=P0^4;
+   8          sbit st=P0^5; 
+   9          sbit button=P2^0;
+  10          uchar temp;
+  11          void delay(uint z);
+  12          void input(uchar i);
+  13          void output();
+  14          void main()
+  15          {
+  16   1              int a,b;
+  17   1              input(0xff);
+  18   1              output();
+  19   1              if(button==0)
+  20   1              {
+  21   2                      while(1)
+  22   2                      {
+  23   3                              for(b=0;b<2;b++)
+  24   3                              {
+  25   4                                      temp=0x01;
+  26   4                                      for(a=0;a<8;a++)
+  27   4                                      {
+  28   5                                              input(temp);
+  29   5                                              temp=_crol_(temp,1);
+  30   5                                              delay(500);
+  31   5                                              output();
+  32   5                                      }
+  33   4                                      temp=0x80;
+  34   4                                      for(a=8;a>0;a--)
+  35   4                                      {
+  36   5                                              input(temp);
+  37   5                                              temp=_cror_(temp,1);
+  38   5                                              delay(500);
+  39   5                                              output();
+  40   5                                      }
+  41   4                              }
+  42   3                              temp=0x03;
+  43   3                              for(a=0;a<7;a++)
+  44   3                              {
+  45   4                                              input(temp);
+  46   4                                              temp=_crol_(temp,1);
+  47   4                                              delay(500);
+  48   4                                              output();       
+  49   4                              }       
+  50   3                      }
+  51   2              }
+  52   1      }
+  53          void input(uchar i)
+  54          {
+  55   1              int k;
+C51 COMPILER V9.00   流水灯加强                                                            06/17/2016 22:22:35 PAGE 2   
+
+  56   1              for(k=0;k<8;k++)
+  57   1              {
+  58   2                      i<<=1;
+  59   2                      DS=CY;
+  60   2                      sh=0;
+  61   2                      _nop_();
+  62   2                      _nop_();
+  63   2                      sh=1;
+  64   2                      _nop_();
+  65   2                      _nop_();
+  66   2              }
+  67   1      }
+  68          void output()
+  69          {
+  70   1              st=0;
+  71   1              _nop_();
+  72   1              _nop_();
+  73   1              st=1;
+  74   1              _nop_(); 
+  75   1              _nop_();
+  76   1      }
+  77          void delay(uint z)
+  78          {
+  79   1              int x,y;
+  80   1              for(x=0;x<110;x++)
+  81   1              for(y=z;y>0;y--);
+  82   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    277    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      2       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

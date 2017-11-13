@@ -1,0 +1,129 @@
+C51 COMPILER V9.00   车位项目                                                              06/18/2016 05:41:43 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE 车位项目
+OBJECT MODULE PLACED IN 车位项目.OBJ
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE 车位项目.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg51.h>
+   2          #include<intrins.h>
+   3          #define uchar unsigned char
+   4          #define uint unsigned int
+   5          sbit sh=P1^0;
+   6          sbit DS=P1^1;
+   7          sbit st=P1^2;
+   8          sbit beep=P2^3;
+   9          uchar led_mod[]={0x81,0xbf,0xbf,0x81,0xbd,0xbd,0xbd,0x81,
+  10                                           0x81,0xfb,0xf7,0xef,0xef,0xef,0xef,0xef};         //列
+  11          uchar led_modno[]={0x81,0xef,0xef,0x00,0xef,0xcf,0xae,0x60};
+  12          uchar led_seg[]={0x01,0x02,0x04,0x08,0x10,0x29,0x40,0x80};                 //行
+  13          void input(uchar i);
+  14          void output();
+  15          void delay(uint z);
+  16          void main()
+  17          {
+  18   1              int a,b;
+  19   1              beep=0;
+  20   1              while(P2==0xf7)
+  21   1              {
+  22   2                      for(b=0;b<80;b++)
+  23   2                      {
+  24   3                              for(a=0;a<8;a++)
+  25   3                              {
+  26   4                                      input(led_mod[a]);
+  27   4                                      input(led_seg[a]);
+  28   4                                      delay(1);
+  29   4                                      output();
+  30   4                              }
+  31   3                      }
+  32   2                      for(b=0;b<80;b++)
+  33   2                      {
+  34   3                              for(a=0;a<8;a++)
+  35   3                              {        
+  36   4                                      input(led_mod[a+8]);
+  37   4                                      input(led_seg[a]);
+  38   4                                      delay(1);
+  39   4                                      output();
+  40   4                              }
+  41   3                      }
+  42   2              }       
+  43   1              while(P2==0xf6)
+  44   1              {
+  45   2                      for(b=0;b<80;b++)
+  46   2                      {
+  47   3                              for(a=0;a<8;a++)
+  48   3                              {
+  49   4                                      input(led_mod[a+8]);
+  50   4                                      input(led_seg[a]);
+  51   4                                      delay(1);
+  52   4                                      output();
+  53   4                              }
+  54   3                      }       
+  55   2              }
+C51 COMPILER V9.00   车位项目                                                              06/18/2016 05:41:43 PAGE 2   
+
+  56   1              while(P2==0xf5)
+  57   1              {
+  58   2                      for(b=0;b<80;b++)
+  59   2                      {
+  60   3                              for(a=0;a<8;a++)
+  61   3                              {        
+  62   4                                      input(led_mod[a]);
+  63   4                                      input(led_seg[a]);
+  64   4                                      delay(1);
+  65   4                                      output();
+  66   4                              }
+  67   3                      }
+  68   2              }
+  69   1              while(P2==0xf4)
+  70   1              {
+  71   2                      for(b=0;b<80;b++)
+  72   2                      {
+  73   3                              for(a=0;a<8;a++)
+  74   3                              {        
+  75   4                                      input(led_modno[a]);
+  76   4                                      input(led_seg[a]);
+  77   4                                      delay(1);
+  78   4                                      output();
+  79   4                              }
+  80   3                      }
+  81   2              }               
+  82   1      }
+  83          void input(uchar i)
+  84          {
+  85   1              int j;
+  86   1              for(j=0;j<8;j++)
+  87   1              {
+  88   2                      i<<=1;
+  89   2                      DS=CY;
+  90   2                      sh=0;
+  91   2                      sh=1;
+  92   2              }               
+  93   1      }
+  94          void output()
+  95          {
+  96   1              st=0;
+  97   1              st=1;   
+  98   1      }
+  99          void delay(uint z)
+ 100          {
+ 101   1              int x,y;
+ 102   1              for(x=0;x<110;x++)
+ 103   1              for(y=z;y>0;y--);
+ 104   1      }                       
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    430    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     32       4
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

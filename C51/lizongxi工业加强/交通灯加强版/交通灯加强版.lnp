@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"交通灯加强版.obj" 
+TO "交通灯加强版" 
+RAMSIZE(256) 

@@ -1,0 +1,60 @@
+C51 COMPILER V9.00   Á·Ï_7                                                                 04/19/2016 18:20:43 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE Á·Ï_7
+OBJECT MODULE PLACED IN Á·Ï°7.OBJ
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE Á·Ï°7.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1           #include<reg52.h>
+   2           unsigned char led[]={0xfe,0xfd,0xfb,0xf7};
+   3           void delay(unsigned char time)
+   4           {
+   5   1          unsigned int j=15000;
+   6   1          for(;time>0;time--)
+   7   1          for(;j>0;j--);
+   8   1       }
+   9           void main()
+  10           {
+  11   1          bit dir=0,run=0;
+  12   1          char i;
+  13   1          while(1)
+  14   1          {
+  15   2              switch(P2&0x0f)
+  16   2              {
+  17   3                  case 0x0e:run=1;break;
+  18   3                  case 0x0d:run=0,dir=0;break;
+  19   3                  case 0x0b:dir=1;break;
+  20   3                  case 0x07:dir=0;break;
+  21   3              }
+  22   2              if(run)
+  23   2              if(dir)
+  24   2              for(i=0;i<=3;i++)
+  25   2              {
+  26   3                  P1=led[i];
+  27   3                  delay(200);
+  28   3              }
+  29   2              else
+  30   2              for(i=3;i>=0;i--)
+  31   2              {
+  32   3                  P1=led[i];
+  33   3                  delay(200);
+  34   3              }
+  35   2              else P1=0xff;
+  36   2          }
+  37   1       }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    121    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      4    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       2
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

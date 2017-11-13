@@ -1,0 +1,28 @@
+  ORG 0000H
+LJMP MAIN
+ORG 0003H
+LJMP EXT0
+ORG 0030H
+MAIN:
+    MOV SP,#5FH
+
+    SETB IT0
+
+    SETB EX0
+
+    SETB EA
+
+    MOV A,#88H
+
+    MOV P2,A
+
+    SJMP $
+
+EXT0:
+    CPL A
+
+    MOV P2,A
+
+    RETI
+
+    END

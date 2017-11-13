@@ -1,0 +1,174 @@
+C51 COMPILER V9.00   电子薩                                                                06/23/2016 02:17:02 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE 电子薩
+OBJECT MODULE PLACED IN 电子锁.OBJ
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE 电子锁.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #include<intrins.h>
+   3          #define uchar unsigned char
+   4          #define uint unsigned int
+   5          sbit sh=P0^0;
+   6          sbit DS=P0^1;
+   7          sbit st=P0^2;
+   8          sbit sh2=P1^0;
+   9          sbit DS2=P1^1;
+  10          sbit st2=P1^2;
+  11          sbit beep=P2^3;
+  12          sbit gr=P2^4;
+  13          sbit re=P2^5;
+  14          uchar led_mod[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x58,0x5e,0x79,0x71};
+  15          uchar led_seg[]={0xfe,0xfd,0xfb,0xf7};  
+  16          uchar password[]={0,1,2,3};
+  17          uchar saomiao();
+  18          uchar tempdate[4];
+  19          void input(uchar i);
+  20          void output();
+  21          void delay(uint z);
+  22          void main()
+  23          {
+  24   1              uchar a=0,b,num;
+  25   1              uchar temp[4];
+  26   1              P2=0;
+  27   1              beep=0;
+  28   1              re=1;
+  29   1              while(1)
+  30   1              {
+  31   2                      num=saomiao();
+  32   2                      if(num!=0xff)
+  33   2                      {
+  34   3                              if(a<4)
+  35   3                              {
+  36   4                                      temp[a]=led_mod[num];
+  37   4                                      tempdate[a]=temp[a];
+  38   4                                      input(led_seg[a]);
+  39   4                                      input(temp[a]);
+  40   4                                      output();       
+  41   4                              }
+  42   3                              a++;
+  43   3                              if(a==4)
+  44   3                              { 
+  45   4                                      a=0;
+  46   4                                      if((tempdate[0]==led_mod[password[0]])&&(tempdate[1]==led_mod[password[1]])&&(tempdate[2]==led_mod[pas
+             -sword[2]])&&(tempdate[3]==led_mod[password[3]]))
+  47   4                                      {
+  48   5                                          gr=1;
+  49   5                                              beep=1;
+  50   5                                              re=0;
+  51   5                                              delay(100);
+  52   5                                              beep=0; 
+  53   5                                              input(0x00);
+  54   5                                              output();
+C51 COMPILER V9.00   电子薩                                                                06/23/2016 02:17:02 PAGE 2   
+
+  55   5                                              delay(300);
+  56   5                                              gr=0;
+  57   5                                              re=1;
+  58   5                                      }
+  59   4                                      else
+  60   4                                      {  
+  61   5                                              input(0x00);
+  62   5                                              output();
+  63   5                                              b=5;
+  64   5                                              while(b--)
+  65   5                                              {
+  66   6                                                      beep=1;
+  67   6                                                      re=1;
+  68   6                                                      delay(100);
+  69   6                                                      beep=0;
+  70   6                                                      re=0;
+  71   6                                                      delay(100);
+  72   6                                              } 
+  73   5                                              a=15;
+  74   5                                              while(a--)
+  75   5                                              {
+  76   6                                                      re=1;
+  77   6                                                      delay(100);
+  78   6                                                      re=0;
+  79   6                                                      delay(100);
+  80   6                                              }
+  81   5                                              re=1;
+  82   5                                      }
+  83   4                              }
+  84   3                      }
+  85   2              }
+  86   1      }
+  87          void input(uchar i)
+  88          {
+  89   1              int j;
+  90   1              for(j=0;j<8;j++)
+  91   1              {
+  92   2                      i<<=1;
+  93   2                      DS=CY;
+  94   2                      sh=0;
+  95   2                      sh=1;
+  96   2              }
+  97   1      }
+  98          void output()
+  99          {
+ 100   1              st=0;
+ 101   1              st=1;   
+ 102   1      }
+ 103          void delay(uint z)
+ 104          {
+ 105   1              int x,y;
+ 106   1              for(x=0;x<110;x++)
+ 107   1              for(y=z;y>0;y--);
+ 108   1      }
+ 109          uchar saomiao() 
+ 110          {
+ 111   1              uchar fortemp,revtemp,key;
+ 112   1              P3=0x0f;
+ 113   1              if(P3!=0x0f)
+ 114   1              {
+ 115   2                      fortemp=P3;
+ 116   2                      P3=0xf0;
+C51 COMPILER V9.00   电子薩                                                                06/23/2016 02:17:02 PAGE 3   
+
+ 117   2                      revtemp=P3;
+ 118   2                      fortemp=fortemp|revtemp;
+ 119   2                      while(P3!=0xf0)
+ 120   2                      {
+ 121   3                              switch(fortemp)
+ 122   3                              {
+ 123   4                                      case 0xee:key=0;break;
+ 124   4                                      case 0xde:key=1;break;
+ 125   4                                      case 0xbe:key=2;break;
+ 126   4                                      case 0x7e:key=3;break;
+ 127   4                                      case 0xed:key=4;break;
+ 128   4                                      case 0xdd:key=5;break;
+ 129   4                                      case 0xbd:key=6;break;
+ 130   4                                      case 0x7d:key=7;break;
+ 131   4                                      case 0xeb:key=8;break;
+ 132   4                                      case 0xdb:key=9;break;
+ 133   4                                      case 0xbb:key=10;break;
+ 134   4                                      case 0x7b:key=11;break;
+ 135   4                                      case 0xe7:key=12;break;
+ 136   4                                      case 0xd7:key=13;break;
+ 137   4                                      case 0xb7:key=14;break;
+ 138   4                                      case 0x77:key=15;break;
+ 139   4                                      default:key=0xff;break;
+ 140   4                              }
+ 141   3                      }
+ 142   2              }
+ 143   1              else 
+ 144   1              key=0xff;
+ 145   1              return key;
+ 146   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    474    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     28       8
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

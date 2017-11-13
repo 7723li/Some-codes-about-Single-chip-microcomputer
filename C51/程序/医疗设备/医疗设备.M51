@@ -1,0 +1,177 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        06/04/2017  23:18:39  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+E:\KEIL\C51\BIN\BL51.EXE STARTUP.obj, 医疗设备.obj TO 医疗设备
+
+
+MEMORY MODEL: SMALL
+
+
+INPUT MODULES INCLUDED:
+  STARTUP.obj (?C_STARTUP)
+  医疗设备.obj (医疗设备)
+  E:\KEIL\C51\LIB\C51S.LIB (?C_INIT)
+
+
+LINK MAP OF MODULE:  医疗设备 (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            DATA    0008H     0001H     UNIT         ?DT?医疗设备
+                    0009H     0017H                  *** GAP ***
+            BIT     0020H.0   0000H.3   UNIT         ?BI?医疗设备
+                    0020H.3   0000H.5                *** GAP ***
+            IDATA   0021H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+            CODE    0003H     0015H     UNIT         ?PR?MAIN?医疗设备
+            CODE    0018H     0007H     UNIT         ?C_INITSEG
+                    001FH     0004H                  *** GAP ***
+            CODE    0023H     0003H     ABSOLUTE     
+            CODE    0026H     008CH     UNIT         ?C_C51STARTUP
+            CODE    00B2H     002EH     UNIT         ?PR?SER_INT?医疗设备
+            CODE    00E0H     0013H     UNIT         ?PR?SERIAL_INIT?医疗设备
+
+
+
+OVERLAY MAP OF MODULE:   医疗设备 (?C_STARTUP)
+
+
+SEGMENT
+  +--> CALLED SEGMENT
+---------------------
+?C_C51STARTUP
+  +--> ?PR?MAIN?医疗设备
+  +--> ?C_INITSEG
+
+?PR?MAIN?医疗设备
+  +--> ?PR?SERIAL_INIT?医疗设备
+
+
+
+SYMBOL TABLE OF MODULE:  医疗设备 (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/04/2017  23:18:39  PAGE 2
+
+
+
+  -------         MODULE        ?C_STARTUP
+  C:0026H         SEGMENT       ?C_C51STARTUP
+  I:0021H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0029H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:0026H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0026H         LINE#         133
+  C:0028H         LINE#         134
+  C:0029H         LINE#         135
+  C:002AH         LINE#         136
+  C:002CH         LINE#         185
+  C:002FH         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        医疗设备
+  C:0000H         SYMBOL        _ICE_DUMMY_
+  D:0090H         PUBLIC        P1
+  D:00B0H         PUBLIC        P3
+  B:00A8H.7       PUBLIC        EA
+  B:0020H.0       PUBLIC        Money
+  D:00A8H         PUBLIC        IE
+  B:00A8H.4       PUBLIC        ES
+  D:00B8H         PUBLIC        IP
+  C:00E0H         PUBLIC        serial_init
+  B:0098H.0       PUBLIC        RI
+  B:0098H.1       PUBLIC        TI
+  C:0003H         PUBLIC        main
+  D:0099H         PUBLIC        SBUF
+  D:0098H         PUBLIC        SCON
+  D:0089H         PUBLIC        TMOD
+  D:0088H         PUBLIC        TCON
+  B:0020H.1       PUBLIC        Send_ed
+  D:0008H         PUBLIC        UART_buff
+  B:0020H.2       PUBLIC        New_rec
+  D:008DH         PUBLIC        TH1
+  D:008BH         PUBLIC        TL1
+BL51 BANKED LINKER/LOCATER V6.22                                                      06/04/2017  23:18:39  PAGE 3
+
+
+  B:0090H.0       PUBLIC        LED
+  B:0088H.6       PUBLIC        TR1
+  D:00C8H         PUBLIC        T2CON
+  C:00B2H         PUBLIC        ser_int
+  D:00D0H         PUBLIC        PSW
+  -------         PROC          SERIAL_INIT
+  C:00E0H         LINE#         6
+  C:00E0H         LINE#         7
+  C:00E0H         LINE#         8
+  C:00E3H         LINE#         9
+  C:00E6H         LINE#         10
+  C:00E9H         LINE#         11
+  C:00ECH         LINE#         12
+  C:00EEH         LINE#         13
+  C:00F0H         LINE#         14
+  C:00F2H         LINE#         15
+  -------         ENDPROC       SERIAL_INIT
+  -------         PROC          MAIN
+  C:0003H         LINE#         17
+  C:0003H         LINE#         18
+  C:0003H         LINE#         19
+  C:0006H         LINE#         20
+  C:0009H         LINE#         21
+  C:0009H         LINE#         22
+  C:0009H         LINE#         23
+  C:000FH         LINE#         24
+  C:000FH         LINE#         25
+  C:0012H         LINE#         26
+  C:0014H         LINE#         27
+  C:0016H         LINE#         28
+  C:0016H         LINE#         29
+  -------         ENDPROC       MAIN
+  -------         PROC          SER_INT
+  C:00B2H         LINE#         32
+  C:00B6H         LINE#         34
+  C:00B9H         LINE#         35
+  C:00B9H         LINE#         36
+  C:00BBH         LINE#         37
+  C:00BDH         LINE#         38
+  C:00C0H         LINE#         39
+  C:00C7H         LINE#         40
+  C:00CEH         LINE#         41
+  C:00D5H         LINE#         42
+  C:00D7H         LINE#         44
+  C:00D7H         LINE#         45
+  C:00D9H         LINE#         46
+  C:00DBH         LINE#         47
+  C:00DBH         LINE#         48
+  -------         ENDPROC       SER_INT
+  -------         ENDMOD        医疗设备
+
+Program Size: data=10.3 xdata=0 code=239
+LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

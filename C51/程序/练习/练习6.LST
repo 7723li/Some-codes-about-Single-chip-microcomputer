@@ -1,0 +1,114 @@
+C51 COMPILER V9.00   Á·Ï_6                                                                 04/14/2016 20:12:39 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE Á·Ï_6
+OBJECT MODULE PLACED IN Á·Ï°6.OBJ
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE Á·Ï°6.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #include<intrins.h>
+   3          #define uchar unsigned char
+   4          #define uint  unsigned int
+   5          uchar temp;
+   6          void delay(uint);
+   7          sbit D1=P1^0;
+   8          sbit D2=P3^3;
+   9          int a,b;
+  10          void main()
+  11          {
+  12   1          for(a=3;a>0;a--)
+  13   1          {
+  14   2              for(b=3;b>0;b--)
+  15   2                  {
+  16   3                      temp=0x55; //01010101
+  17   3                      delay(500);
+  18   3                      P1=temp;
+  19   3                  }
+  20   2              for(b=3;b>0;b--)
+  21   2                  {
+  22   3                      temp=0xaa; //10101010
+  23   3                      delay(500);
+  24   3                      P1=temp;
+  25   3                  }
+  26   2          }
+  27   1          temp=0xfe;
+  28   1          P1=temp;
+  29   1          for(a=3;a>0;a--)
+  30   1          {
+  31   2              for(b=7;b>0;b--)
+  32   2              {
+  33   3                  P1=temp;
+  34   3                  delay(500);
+  35   3                  temp=_crol_(temp,1);
+  36   3              }
+  37   2              for(b=7;b>0;b--)
+  38   2              {
+  39   3                  P1=temp;
+  40   3                  delay(500);
+  41   3                  temp=_cror_(temp,1);
+  42   3              }
+  43   2          }
+  44   1          temp=0x7e;
+  45   1          P1=temp;
+  46   1          for(a=3;a>0;a--)
+  47   1          {
+  48   2              temp=0x7e;
+  49   2              P1=temp;  //01111110
+  50   2              delay(500);
+  51   2              temp=0xbd;
+  52   2              P1=temp;  //10111101
+  53   2              delay(500);
+  54   2              temp=0xdb;
+  55   2              P1=temp;  //11011011
+C51 COMPILER V9.00   Á·Ï_6                                                                 04/14/2016 20:12:39 PAGE 2   
+
+  56   2              delay(500);
+  57   2              temp=0xe7;
+  58   2              P1=temp;  //11100111
+  59   2              delay(500);
+  60   2              temp=0xdb;
+  61   2              P1=temp;  //11011011
+  62   2              delay(500);
+  63   2              temp=0xbd;
+  64   2              P1=temp;  //10111101
+  65   2              delay(500);
+  66   2              temp=0x7e;
+  67   2              P1=temp;  //01111110
+  68   2              delay(500);
+  69   2          }
+  70   1          temp=0x00;
+  71   1          P1=temp;
+  72   1          for(a=3;a>0;a--)
+  73   1          {
+  74   2              temp=0x00;
+  75   2              delay(500);
+  76   2              P1=temp;
+  77   2              temp=0xff;
+  78   2              delay(500);
+  79   2              P1=temp;
+  80   2          }
+  81   1          P1=0xff;
+  82   1          while(1);
+  83   1      }
+  84          void delay(uint z)
+  85          {
+  86   1          int x,y;
+  87   1          for(x=z;x>0;x--)
+  88   1          for(y=110;y>0;y--);
+  89   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    384    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =      5    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

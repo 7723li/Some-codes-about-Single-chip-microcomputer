@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"电子锁.obj" 
+TO "电子锁" 
+RAMSIZE(256) 

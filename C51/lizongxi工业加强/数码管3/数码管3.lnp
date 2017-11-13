@@ -1,0 +1,4 @@
+"STARTUP.obj",
+"数码管3.obj" 
+TO "数码管3" 
+RAMSIZE(256) 

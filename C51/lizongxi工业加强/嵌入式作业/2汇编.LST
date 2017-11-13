@@ -1,0 +1,92 @@
+A51 MACRO ASSEMBLER  2»ã__                                                                06/13/2016 22:55:32 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.01
+OBJECT MODULE PLACED IN 2»ã±à.OBJ
+ASSEMBLER INVOKED BY: E:\keil\C51\BIN\A51.EXE 2»ã±à.S SET(SMALL) DEBUG EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     ORG 0000H
+0000 02000E            2         LJMP START
+000B                   3         ORG 000BH
+000B 020037            4         LJMP Timer0Interrupt
+                       5     
+000E                   6     START:
+000E 758160            7         MOV SP,#60H
+0011 120027            8         LCALL InitTimer0
+                       9     
+0014                  10     LOOP:
+0014 D2A0             11              SETB P2.0
+0016 D2A1             12                      SETB P2.1
+0018 D2A2             13                      SETB P2.2
+001A D2A3             14                      SETB P2.3
+001C D2A4             15                      SETB P2.4
+001E D2A5             16                      SETB P2.5
+0020 D2A6             17                      SETB P2.6
+0022 D2A7             18                      SETB P2.7
+                      19     
+0024 020014           20         LJMP LOOP
+                      21     
+0027                  22     InitTimer0:
+0027 758901           23         MOV TMOD,#01H
+002A 758C3C           24         MOV TH0,#3CH
+002D 758AB0           25         MOV TL0,#0B0H
+0030 D2AF             26         SETB EA
+0032 D2A9             27         SETB ET0
+0034 D28C             28         SETB TR0
+0036 22               29         RET
+                      30     
+0037                  31     Timer0Interrupt:
+0037 C083             32         PUSH DPH
+0039 C082             33         PUSH DPL
+003B C0E0             34         PUSH ACC
+003D C28C             35             CLR TR0
+003F B2A0             36             CPL P2.0
+0041 B2A1             37             CPL P2.1
+0043 B2A2             38             CPL P2.2
+0045 B2A3             39             CPL P2.3
+0047 B2A4             40             CPL P2.4
+0049 B2A5             41             CPL P2.5
+004B B2A6             42             CPL P2.6
+004D B2A7             43             CPL P2.7
+004F D28C             44             SETB TR0
+0051 758C3C           45         MOV TH0,#3CH
+0054 758AB0           46         MOV TL0,#0B0H
+                      47      
+                      48     
+0057 D0E0             49         POP ACC
+0059 D082             50         POP DPL
+005B D083             51         POP DPH
+005D 32               52         RETI
+                      53     
+                      54     END
+A51 MACRO ASSEMBLER  2»ã__                                                                06/13/2016 22:55:32 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+DPH. . . . . . . .  D ADDR   0083H   A   
+DPL. . . . . . . .  D ADDR   0082H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET0. . . . . . . .  B ADDR   00A8H.1 A   
+INITTIMER0 . . . .  C ADDR   0027H   A   
+LOOP . . . . . . .  C ADDR   0014H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+SP . . . . . . . .  D ADDR   0081H   A   
+START. . . . . . .  C ADDR   000EH   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TIMER0INTERRUPT. .  C ADDR   0037H   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

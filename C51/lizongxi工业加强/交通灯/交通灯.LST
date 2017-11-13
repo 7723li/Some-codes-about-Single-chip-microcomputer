@@ -1,0 +1,123 @@
+C51 COMPILER V9.00   交通灯                                                                06/17/2016 22:17:23 PAGE 1   
+
+
+C51 COMPILER V9.00, COMPILATION OF MODULE 交通灯
+OBJECT MODULE PLACED IN 交通灯.OBJ
+COMPILER INVOKED BY: E:\keil\C51\BIN\C51.EXE 交通灯.c BROWSE DEBUG OBJECTEXTEND
+
+line level    source
+
+   1          #include<reg52.h>
+   2          #include<intrins.h>
+   3          #define uint unsigned int
+   4          #define uchar unsigned char
+   5          uchar led_mod[]={0x3f,0x06,0x5b,0x4f,0x66,0x6d,0x7d,0x07,0x7f,0x6f,0x77,0x7c,0x58,0x5e,0x79,0x71};
+   6          uchar led_seg[]={0xfe,0xfd};
+   7          sbit sh=P0^0;
+   8          sbit DS=P0^1;
+   9          sbit st=P0^2;
+  10          sbit button=P2^0;
+  11          sbit beep=P2^3;
+  12          void input(uchar g);
+  13          void output();
+  14          void led_show(uint d);
+  15          void delay(uint z);
+  16          void temp();
+  17          void main()
+  18          {
+  19   1              int a,b,c;
+  20   1              P2=0x00;
+  21   1              if(button==0)
+  22   1              {
+  23   2                      while(1)
+  24   2                      {
+  25   3                              for(c=30;c>3;c--)
+  26   3                              {
+  27   4                                      P2=0x0c;
+  28   4                                      led_show(c);
+  29   4                                      P2=0x04;
+  30   4                                      delay(40);
+  31   4                              }
+  32   3                              for(c=3;c>0;c--)
+  33   3                              {
+  34   4                                      P2=0x00;
+  35   4                                      led_show(c);
+  36   4                                      P2=0x0c;
+  37   4                                      delay(30);
+  38   4                              }
+  39   3                              for(b=3;b>0;b--)
+  40   3                              {       
+  41   4                                      P2=0x02;
+  42   4                                      led_show(b);
+  43   4                              }       
+  44   3                              for(a=57;a>0;a--)
+  45   3                              {       
+  46   4                                      P2=0x01;
+  47   4                                      led_show(a);
+  48   4                              }       
+  49   3                      }
+  50   2              }
+  51   1      }
+  52          void led_show(uint d)
+  53          {
+  54   1              int e,f,i;
+  55   1              e=d/10;
+C51 COMPILER V9.00   交通灯                                                                06/17/2016 22:17:23 PAGE 2   
+
+  56   1              f=d%10;
+  57   1              for(i=0;i<40;i++)
+  58   1              {
+  59   2                      input(led_seg[0]);
+  60   2                      input(led_mod[e]);
+  61   2                      output();
+  62   2                      delay(5);
+  63   2                      input(led_seg[1]);
+  64   2                      input(led_mod[f]);
+  65   2                      output();
+  66   2                      delay(5);
+  67   2              }       
+  68   1      }
+  69          void input(uchar g)
+  70          {
+  71   1              int h;
+  72   1              for(h=0;h<8;h++)
+  73   1              {
+  74   2                      g<<=1;
+  75   2                      DS=CY;
+  76   2                      sh=0;
+  77   2                      _nop_();
+  78   2                      _nop_();
+  79   2                      sh=1;
+  80   2                      _nop_();
+  81   2                      _nop_();
+  82   2              }
+  83   1      }
+  84          void output()
+  85          {
+  86   1              st=0;
+  87   1              _nop_();
+  88   1              _nop_();
+  89   1              st=1;
+  90   1              _nop_();
+  91   1              _nop_();
+  92   1      }
+  93          void delay(uint z)
+  94          {
+  95   1              int x,y;
+  96   1              for(x=0;x<110;x++)
+  97   1              for(y=z;y>0;y--);
+  98   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    363    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     18      12
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
